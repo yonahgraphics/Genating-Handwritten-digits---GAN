@@ -43,8 +43,6 @@ We will start by creating a function to make a single layer/block for the genera
 
 
 ```python
-# UNQ_C1 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)
-# GRADED FUNCTION: get_generator_block
 def get_generator_block(input_dim, output_dim):
     '''
     Function for returning a block of the generator's neural network
@@ -73,8 +71,6 @@ Using these values, the generator will build a neural network with 5 layers/bloc
 
 
 ```python
-# UNQ_C2 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)
-# GRADED FUNCTION: Generator
 class Generator(nn.Module):
     '''
     Generator Class
@@ -119,8 +115,6 @@ To be able to use the generator, we will need to be able to create noise vectors
 
 
 ```python
-# UNQ_C3 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)
-# GRADED FUNCTION: get_noise
 def get_noise(n_samples, z_dim, device='cpu'):
     '''
     Function for creating noise vectors: Given the dimensions (n_samples, z_dim),
@@ -147,8 +141,6 @@ REctified Linear Unit (ReLU) |  Leaky ReLU
 
 
 ```python
-# UNQ_C4 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)
-# GRADED FUNCTION: get_discriminator_block
 def get_discriminator_block(input_dim, output_dim):
     '''
     Discriminator Block
@@ -178,8 +170,6 @@ The discriminator will build a neural network with 4 layers. It will start with 
 
 
 ```python
-# UNQ_C5 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)
-# GRADED FUNCTION: Discriminator
 class Discriminator(nn.Module):
     '''
     Discriminator Class
@@ -248,48 +238,6 @@ dataloader = DataLoader(
 device = 'cuda'
 ```
 
-    Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz
-    Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to .\MNIST\raw\train-images-idx3-ubyte.gz
-    
-
-
-      0%|          | 0/9912422 [00:00<?, ?it/s]
-
-
-    Extracting .\MNIST\raw\train-images-idx3-ubyte.gz to .\MNIST\raw
-    
-    Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz
-    Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz to .\MNIST\raw\train-labels-idx1-ubyte.gz
-    
-
-
-      0%|          | 0/28881 [00:00<?, ?it/s]
-
-
-    Extracting .\MNIST\raw\train-labels-idx1-ubyte.gz to .\MNIST\raw
-    
-    Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz
-    Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz to .\MNIST\raw\t10k-images-idx3-ubyte.gz
-    
-
-
-      0%|          | 0/1648877 [00:00<?, ?it/s]
-
-
-    Extracting .\MNIST\raw\t10k-images-idx3-ubyte.gz to .\MNIST\raw
-    
-    Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz
-    Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz to .\MNIST\raw\t10k-labels-idx1-ubyte.gz
-    
-
-
-      0%|          | 0/4542 [00:00<?, ?it/s]
-
-
-    Extracting .\MNIST\raw\t10k-labels-idx1-ubyte.gz to .\MNIST\raw
-    
-    
-
     C:\ProgramData\Anaconda3\lib\site-packages\torchvision\datasets\mnist.py:498: UserWarning: The given NumPy array is not writeable, and PyTorch does not support non-writeable tensors. This means you can write to the underlying (supposedly non-writeable) NumPy array using the tensor. You may want to copy the array to protect its data or make it writeable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at  ..\torch\csrc\utils\tensor_numpy.cpp:180.)
       return torch.from_numpy(parsed.astype(m[2], copy=False)).view(*s)
     
@@ -303,21 +251,6 @@ gen_opt = torch.optim.Adam(gen.parameters(), lr=lr)
 disc = Discriminator().to(device) 
 disc_opt = torch.optim.Adam(disc.parameters(), lr=lr)
 ```
-
-
-    ---------------------------------------------------------------------------
-
-    NameError                                 Traceback (most recent call last)
-
-    <ipython-input-5-479791d83f7b> in <module>
-    ----> 1 gen = Generator(z_dim).to(device)
-          2 gen_opt = torch.optim.Adam(gen.parameters(), lr=lr)
-          3 disc = Discriminator().to(device)
-          4 disc_opt = torch.optim.Adam(disc.parameters(), lr=lr)
-    
-
-    NameError: name 'z_dim' is not defined
-
 
 Before we train your GAN, we will need to create functions to calculate the discriminator's loss and the generator's loss. This is how the discriminator and generator will know how they are doing and improve themselves. Since the generator is needed when calculating the discriminator's loss, you will need to call .detach() on the generator result to ensure that only the discriminator is updated!
 
@@ -469,7 +402,7 @@ for epoch in range(n_epochs):
       0%|          | 0/469 [00:00<?, ?it/s]
 
 
-    Epoch 1, step 500: Generator loss: 1.3961317565441138, discriminator loss: 0.4177121202945714
+    Epoch 1, step 500: Generator loss: 1.3897773492336274, discriminator loss: 0.4192461298108101
     
 
 
@@ -488,7 +421,7 @@ for epoch in range(n_epochs):
       0%|          | 0/469 [00:00<?, ?it/s]
 
 
-    Epoch 2, step 1000: Generator loss: 1.7512936997413642, discriminator loss: 0.27945925456285464
+    Epoch 2, step 1000: Generator loss: 1.6771019732952124, discriminator loss: 0.29843338766694055
     
 
 
@@ -507,7 +440,7 @@ for epoch in range(n_epochs):
       0%|          | 0/469 [00:00<?, ?it/s]
 
 
-    Epoch 3, step 1500: Generator loss: 2.0672803444862358, discriminator loss: 0.1574216859638692
+    Epoch 3, step 1500: Generator loss: 1.9654575867652888, discriminator loss: 0.17314521765708932
     
 
 
@@ -526,7 +459,7 @@ for epoch in range(n_epochs):
       0%|          | 0/469 [00:00<?, ?it/s]
 
 
-    Epoch 4, step 2000: Generator loss: 1.6612643587589264, discriminator loss: 0.22807591715455072
+    Epoch 4, step 2000: Generator loss: 1.7840134890079498, discriminator loss: 0.19330068460106853
     
 
 
@@ -538,6 +471,64 @@ for epoch in range(n_epochs):
 
     
 ![png](output_24_16.png)
+    
+
+
+
+      0%|          | 0/469 [00:00<?, ?it/s]
+
+
+    Epoch 5, step 2500: Generator loss: 1.759019383192061, discriminator loss: 0.19013477468490597
+    
+
+
+    
+![png](output_24_19.png)
+    
+
+
+
+    
+![png](output_24_20.png)
+    
+
+
+
+      0%|          | 0/469 [00:00<?, ?it/s]
+
+
+    Runtime tests have failed
+    Epoch 6, step 3000: Generator loss: 2.004922249555587, discriminator loss: 0.15391112728416903
+    
+
+
+    
+![png](output_24_23.png)
+    
+
+
+
+    
+![png](output_24_24.png)
+    
+
+
+
+      0%|          | 0/469 [00:00<?, ?it/s]
+
+
+    Epoch 7, step 3500: Generator loss: 2.48717658472061, discriminator loss: 0.12044517315924158
+    
+
+
+    
+![png](output_24_27.png)
+    
+
+
+
+    
+![png](output_24_28.png)
     
 
 
